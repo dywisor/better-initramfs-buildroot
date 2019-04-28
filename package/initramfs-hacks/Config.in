@@ -1,0 +1,34 @@
+menuconfig BR2_PACKAGE_INITRAMFS_HACKS
+	bool "initramfs hacks"
+
+	depends on BR2_PACKAGE_BETTER_INITRAMFS
+	depends on BR2_INIT_NONE
+
+	help
+		This package lets you select various rootfs modifications
+		for running better-initramfs.
+
+		Some are essential while others are just enhancements,
+		see submenu.
+
+if BR2_PACKAGE_INITRAMFS_HACKS
+
+config BR2_PACKAGE_INITRAMFS_HACKS_DROPBEAR_CONFDIR
+	bool "remove /etc/dropbear symlink"
+	default y
+
+	depends on BR2_PACKAGE_DROPBEAR
+
+	help
+		essential - better-initramfs fails to create /etc/dropbear if it is a symlink, so remove it.
+
+config BR2_PACKAGE_INITRAMFS_HACKS_CRYPTSETUP_RUNDIR
+	bool "create /run/cryptsetup"
+	default y
+
+	depends on BR2_PACKAGE_CRYPTSETUP
+
+	help
+		optional, but recommended - cryptsetup complains if this directory does not exist
+
+endif # BR2_PACKAGE_INITRAMFS_HACKS

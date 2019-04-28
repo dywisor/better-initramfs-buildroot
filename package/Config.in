@@ -2,4 +2,5 @@
 menu "dywi/better-initramfs-buildroot [external repo]"
 	source "package/askpass/Config.in"
 	source "package/better-initramfs/Config.in"
+	source "package/initramfs-hacks/Config.in"
 endmenu
