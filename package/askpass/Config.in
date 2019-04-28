@@ -1,0 +1,7 @@
+config BR2_PACKAGE_ASKPASS
+	bool "askpass"
+
+	help
+		Helper program for unlocking LUKS via SSH in better-initramfs
+
+		https://bitbucket.org/piotrkarbowski/better-initramfs

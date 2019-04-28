@@ -1,0 +1,5 @@
+# br_pkg_repo autogen
+menu "dywi/better-initramfs-buildroot [external repo]"
+	source "package/askpass/Config.in"
+	source "package/better-initramfs/Config.in"
+endmenu
