@@ -1,0 +1,39 @@
+#!/bin/sh
+set -fu
+
+case "${1-}" in
+   '-'|0|6) : ;;
+   *)
+      printf 'telinit: unexpected arg: %s\n' "${1}"
+      exit 64
+   ;;
+esac
+
+PROGS_TO_KILL='@@PROGS_TO_KILL@@'
+if [ -n "${PROGS_TO_KILL-}" ]; then
+   for prog in ${PROGS_TO_KILL}; do
+      $BB pkill -TERM -x "${prog}" || :
+   done
+   sleep 1
+   for prog in ${PROGS_TO_KILL}; do
+      $BB pkill -KILL -x "${prog}" || :
+   done
+fi
+
+sync || :
+
+if [ ! -e /proc/self ] || [ -e /proc/swaps ]; then
+   swapoff -a || :
+fi
+
+umount -n -a -r || :
+
+# TODO: stop block device layers (LVM, LUKS, ...)
+
+case "${1-}" in
+   '-') exit 0 ;;
+   0) poweroff -f ;;
+   6) reboot -f ;;
+esac
+
+exit 9

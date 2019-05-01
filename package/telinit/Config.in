@@ -1,0 +1,51 @@
+menuconfig BR2_PACKAGE_TELINIT
+	bool "telinit"
+
+	depends on BR2_PACKAGE_BETTER_INITRAMFS
+	depends on BR2_INIT_NONE
+
+	help
+		A small telinit script for handling poweroff/reboot in initramfs.
+
+		In order to make this work, you also need
+		select the following options in your busybox configuration:
+
+		  o CONFIG_FEATURE_CALL_TELINIT=y
+		  o CONFIG_TELINIT_PATH="/sbin/telinit"
+
+		The following programs need to be present in the initramfs
+		(as busybox applets or via extra package):
+
+		  o pkill
+		  o mount
+		  o umount
+		  o sync
+		  o swapoff
+		  o true
+		  o reboot
+		  o poweroff
+		  o sleep
+		  o true (usually shell builtin)
+		  o printf (usually shell builtin)
+
+if BR2_PACKAGE_TELINIT
+
+config BR2_PACKAGE_TELINIT_PATH
+	string
+	default "/sbin/telinit"
+
+config BR2_PACKAGE_TELINIT_KILL_PROGS_KNOWN
+	bool "kill well-known programs during poweroff/reboot"
+	default y
+
+	help
+		If you select this option, telinit will kill the following programs
+		if you selected the appropriate package:
+
+		  o dropbear (BR2_PACKAGE_DROPBEAR)
+
+
+config BR2_PACKAGE_TELINIT_KILL_PROGS_LIST
+	string "additional programs to kill during poweroff/reboot"
+
+endif # BR2_PACKAGE_TELINIT
