@@ -1,6 +1,9 @@
 #!/bin/sh
 set -fu
 
+BB='/bin/busybox'
+[ -x "${BB}" ] || BB=
+
 case "${1-}" in
    '-'|0|6) : ;;
    *)
