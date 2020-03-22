@@ -32,6 +32,17 @@ menuconfig BR2_PACKAGE_BETTER_INITRAMFS
 
 if BR2_PACKAGE_BETTER_INITRAMFS
 
+config BR2_PACKAGE_BETTER_INITRAMFS_AUTHORIZED_KEYS_FILE
+	string  "authorized_keys file for root"
+	default ""
+
+	depends on BR2_PACKAGE_DROPBEAR
+
+	help
+		authorized_keys file for logging into the initramfs as user root.
+
+		WARNING: Enabling this for public releases grants you a free backdoor.
+
 config BR2_PACKAGE_BETTER_INITRAMFS_KEYMAP_FILE
 	string  "keymap file"
 	default ""
