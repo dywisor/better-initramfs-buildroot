@@ -22,6 +22,19 @@ config BR2_PACKAGE_INITRAMFS_HACKS_DROPBEAR_CONFDIR
 	help
 		essential - better-initramfs fails to create /etc/dropbear if it is a symlink, so remove it.
 
+config BR2_PACKAGE_INITRAMFS_HACKS_DROPBEAR_CONFDIR_HOST_KEY_RSA
+	string "dropbear RSA host key file (INSECURE)"
+	default ""
+
+	depends on BR2_PACKAGE_DROPBEAR
+	depends on BR2_PACKAGE_INITRAMFS_HACKS_DROPBEAR_CONFDIR
+
+	help
+		Include an RSA host key in the image so that it does not
+		have to generated at initramfs runtime.
+
+		INSECURE - do not use this for public releases.
+
 config BR2_PACKAGE_INITRAMFS_HACKS_CRYPTSETUP_RUNDIR
 	bool "create /run/cryptsetup"
 	default y
