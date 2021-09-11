@@ -4,11 +4,11 @@
 #
 ################################################################################
 
-#BETTER_INITRAMFS_VERSION         = 0.9.2
+#BETTER_INITRAMFS_VERSION         = 0.10.0
 #BETTER_INITRAMFS_LIVEVER_REF     = v$(BETTER_INITRAMFS_VERSION)
 #BETTER_INITRAMFS_SOURCE          = better-initramfs-$(BETTER_INITRAMFS_LIVEVER_REF).tar.gz
 #BETTER_INITRAMFS_SITE            = $(call github,slashbeast,better-initramfs,$(BETTER_INITRAMFS_LIVEVER_REF))
-BETTER_INITRAMFS_LIVEVER_REF     = bab9b88a945af3dfc57cd413cfa8c04f2f772976
+BETTER_INITRAMFS_LIVEVER_REF     = 06d41fdd306f14ea3ef49810fe2f4f66db8b4b25
 BETTER_INITRAMFS_VERSION         = $(BETTER_INITRAMFS_LIVEVER_REF)
 BETTER_INITRAMFS_SITE            = $(call github,dywisor,better-initramfs,$(BETTER_INITRAMFS_LIVEVER_REF))
 BETTER_INITRAMFS_LICENSE         = BSD-2c
