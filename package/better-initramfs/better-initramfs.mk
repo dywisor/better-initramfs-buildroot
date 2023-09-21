@@ -8,7 +8,7 @@
 #BETTER_INITRAMFS_LIVEVER_REF     = v$(BETTER_INITRAMFS_VERSION)
 #BETTER_INITRAMFS_SOURCE          = better-initramfs-$(BETTER_INITRAMFS_LIVEVER_REF).tar.gz
 #BETTER_INITRAMFS_SITE            = $(call github,slashbeast,better-initramfs,$(BETTER_INITRAMFS_LIVEVER_REF))
-BETTER_INITRAMFS_LIVEVER_REF     = e61eb055d62b7479b9de5949afc8086da98e8c2a
+BETTER_INITRAMFS_LIVEVER_REF     = c3ee47f66d1ae4fb8d0af239d645477d681e8c96
 BETTER_INITRAMFS_VERSION         = $(BETTER_INITRAMFS_LIVEVER_REF)
 BETTER_INITRAMFS_SITE            = $(call github,dywisor,better-initramfs,$(BETTER_INITRAMFS_LIVEVER_REF))
 BETTER_INITRAMFS_LICENSE         = BSD-2c
@@ -110,6 +110,8 @@ define BETTER_INITRAMFS_BUILD_CMDS
 endef
 
 # install better-initramfs to target
+# NOTE: not installing /bin/telinit for now (2023-06-25),
+#       using the version from initramfs-hacks instead
 define BETTER_INITRAMFS_INSTALL_TARGET_CMDS
 	$(call BETTER_INITRAMFS_INSFILE,VERSION,,)
 	$(call BETTER_INITRAMFS_INSFILE,functions.sh,,)
@@ -119,6 +121,8 @@ define BETTER_INITRAMFS_INSTALL_TARGET_CMDS
 	$(call BETTER_INITRAMFS_INSFILE,etc/profile.d/00_profile.sh,etc/profile.d/50_better-initramfs.sh,)
 	$(call BETTER_INITRAMFS_INSFILE,bin/resume-boot,,0755)
 	$(call BETTER_INITRAMFS_INSFILE,bin/unlock-luks,,0755)
+	$(call BETTER_INITRAMFS_INSFILE,bin/binit-udhcpc-script,,0755)
+	$(call BETTER_INITRAMFS_INSFILE,bin/binit-zcip-script,,0755)
 	$(call BETTER_INITRAMFS_RECURSIVE_FILE_INSTALL,$(@D)/sourceroot/hooks,hooks,0755)
 endef
 
