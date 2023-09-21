@@ -226,7 +226,7 @@ $(_PKG_UNINSTALL_TARGETS): uninstall-%:
 PHONY += register-config
 register-config: $(_PKG_DIR_IN_BR)
 	if grep -E -- \
-		'^\s*source\s+\"?package/$(PKG_SUBDIR_NAME)/Config.in\"?\s*$$' \
+		'^\s*source\s+\\"?package/$(PKG_SUBDIR_NAME)/Config.in\\"?\s*$$' \
 		'$(BR)/package/Config.in'; \
 	then \
 		echo "Config.in already set up."; \
@@ -242,7 +242,7 @@ register-config: $(_PKG_DIR_IN_BR)
 PHONY += unregister-config
 unregister-config:
 	sed -r \
-		-e '/^\s*source\s+\"?package\/$(PKG_SUBDIR_NAME)\/Config.in\"?\s*$$/d' \
+		-e '/^\s*source\s+\\"?package\/$(PKG_SUBDIR_NAME)\/Config.in\\"?\s*$$/d' \
 		-i '$(BR)/package/Config.in'
 
 
